@@ -19,6 +19,6 @@ describe("ROT13", () => {
 	});
 
 	it("return AB!! when given NO!!", () => {
-		expect(convert("NO!!")).toEqual("AB");
+		expect(convert("NO!!")).toEqual("AB!!");
 	});
 });

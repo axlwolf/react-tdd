@@ -1,18 +1,16 @@
-export const convert=(str: string) =>{
-    const letters = "ABCDEFGHIJKLMNOPORSTUVWXYZ";
+import { dict, separator, shift } from "./constants";
 
-    return str.split("")
-    .map(char => {
-        const index = letters.indexOf(char);
+const getIndex = (index: number, offset: number) =>
+	(index + offset) % dict.length;
 
-        if(index !== -1) {
-            if(index + 13 >= 26) {
-                return letters[index + 13 - 26];
-            } else {
-                return letters[index+13];
-            }
+const getLetterWithOffset = (letter: string) => {
+	const index = dict.indexOf(letter);
+	return dict[getIndex(index, shift)];
+};
 
-            return char;
-        }
-    }).join("");
-}
+const transform = (letter: string) =>
+	dict.includes(letter) ? getLetterWithOffset(letter) : letter;
+
+export const convert = (str: string) => {
+	return str.split(separator).map(transform).join(separator);
+};
